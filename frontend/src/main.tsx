@@ -25,6 +25,7 @@ import React, {
 import { createRoot } from "react-dom/client";
 import {
   ArrowLeft,
+  ArrowRightLeft,
   ArrowRight,
   Check,
   CheckCheck,
@@ -50,6 +51,9 @@ import {
   X,
 } from "lucide-react";
 import "./style.css";
+const CompareWorkspace = lazy(() =>
+  import("./CompareWorkspace").then((m) => ({ default: m.CompareWorkspace })),
+);
 const BackupControls = lazy(() =>
   import("./BackupControls").then((m) => ({ default: m.BackupControls })),
 );
@@ -260,6 +264,8 @@ function App() {
   );
   const [library, setLibrary] = useState<Library | null>(null);
   const [view, setView] = useState("merge");
+  const [compareOpened, setCompareOpened] = useState(false);
+  const [compareBusy, setCompareBusy] = useState(false);
   const [templatePrompt, setTemplatePrompt] = useState(false);
   const [returnFromTemplate, setReturnFromTemplate] = useState(false);
   const [step, setStep] = useState(1);
@@ -643,6 +649,10 @@ function App() {
     await action(msg("browser.clearing"), async () => {
       const result = await local("clearData", { all });
       setLibrary(result.library);
+      if (all) {
+        setCompareOpened(false);
+        setCompareBusy(false);
+      }
       reset();
       setView("merge");
       setDataDialog(null);
@@ -784,15 +794,17 @@ function App() {
         <nav>
           {[
             { id: "merge", label: t("ui.batchMerge"), icon: FolderOpen },
+            { id: "compare", label: t("compare.nav"), icon: ArrowRightLeft },
             { id: "rules", label: t("ui.sourceRules"), icon: Settings2 },
             { id: "template", label: t("ui.standardTemplate"), icon: Table2 },
           ].map((item) => (
             <button
               className={view === item.id ? "nav-item active" : "nav-item"}
               key={item.id}
-              disabled={!!busy || running}
+              disabled={!!busy || running || compareBusy}
               onClick={() => {
                 setView(item.id);
+                if (item.id === "compare") setCompareOpened(true);
                 setTemplateEditId(null);
                 setReturnFromTemplate(false);
                 setError(null);
@@ -817,7 +829,7 @@ function App() {
         </div>
         <button
           className={`nav-item help ${view === "help" ? "active" : ""}`}
-          disabled={!!busy || running}
+          disabled={!!busy || running || compareBusy}
           onClick={() => {
             setView("help");
             setReturnFromTemplate(false);
@@ -829,7 +841,7 @@ function App() {
         </button>
         <button
           className="nav-item"
-          disabled={!!busy || running}
+          disabled={!!busy || running || compareBusy}
           onClick={() =>
             void action(msg("backup.inspecting"), async () => {
               setInventory(await local("dataInventory", undefined));
@@ -841,7 +853,11 @@ function App() {
           {t("browser.clearAll")}
         </button>
         <div className="sidebar-version">
-          <span role="status">{t(`browser.${saveState}`)}</span>
+          <span role="status">
+            {view === "compare"
+              ? t("compare.temporaryStatus")
+              : t(`browser.${saveState}`)}
+          </span>
           {t("ui.sheetMergerV10")}
           <span>{t("ui.lessTimeSpentOnRepetitiveCleanup")}</span>
         </div>
@@ -855,6 +871,7 @@ function App() {
               {
                 {
                   merge: t("ui.batchMerge"),
+                  compare: t("compare.nav"),
                   rules: t("ui.sourceRules"),
                   template: t("ui.standardTemplate"),
                   help: t("ui.userGuide"),
@@ -870,7 +887,7 @@ function App() {
             </span>
           </div>
         </header>
-        <OfflineStatus running={running || !!busy} />
+        <OfflineStatus running={running || !!busy || compareBusy} />
         <main>
           <Suspense fallback={<p role="status">{t("ui.loading")}</p>}>
             {error && (
@@ -889,6 +906,11 @@ function App() {
               <div role="status" className="toast">
                 <CheckCheck size={18} />
                 {renderMessage(notice)}
+              </div>
+            )}
+            {compareOpened && (
+              <div hidden={view !== "compare"}>
+                <CompareWorkspace onBusyChange={setCompareBusy} />
               </div>
             )}
             {view === "merge" && (
@@ -1734,7 +1756,7 @@ function App() {
                     </button>
                   </div>
                   <BackupControls
-                    disabled={!!busy || running}
+                    disabled={!!busy || running || compareBusy}
                     onExport={() =>
                       void action(msg("backup.exporting"), async () => {
                         await local("saveWorkspace", snapshot());

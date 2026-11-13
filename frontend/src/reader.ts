@@ -18,6 +18,8 @@ const MAX_ROWS = 100000;
 export async function readBook(
   file: File,
   encoding = "utf-8-sig",
+  delimiter = "",
+  preserveTimes = false,
 ): Promise<InputBook> {
   const extension = file.name.toLowerCase().split(".").pop();
   if (!["xlsx", "xls", "csv"].includes(extension || ""))
@@ -34,6 +36,7 @@ export async function readBook(
       throw new LocalizedError("encoding_error");
     }
     const parsed = Papa.parse<string[]>(text, {
+      delimiter,
       delimitersToGuess: [",", ";", "\t"],
       skipEmptyLines: false,
     });
@@ -141,7 +144,12 @@ export async function readBook(
               if (d) {
                 const date = new Date(0);
                 date.setUTCFullYear(d.y, d.m - 1, d.d === 0 ? 1 : d.d);
-                date.setUTCHours(0, 0, 0, 0);
+                date.setUTCHours(
+                  preserveTimes ? d.H : 0,
+                  preserveTimes ? d.M : 0,
+                  preserveTimes ? d.S : 0,
+                  preserveTimes ? Math.round(d.u * 1000) : 0,
+                );
                 if (!date1904 && value >= 60 && value < 61) {
                   date.setUTCFullYear(1900, 1, 28);
                 }

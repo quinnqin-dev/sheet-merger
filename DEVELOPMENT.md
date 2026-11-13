@@ -65,3 +65,17 @@ Shared English and Chinese messages live in `shared/locales/`. Keep message keys
 ## License
 
 This project is released under the MIT License. See `LICENSE` for the full text.
+
+## Keyed version comparison (v1.1)
+
+`CompareWorkspace.tsx` is a lazy workspace with a separate `compare.worker.ts`. Its in-memory service owns parsed books, selected worksheets and the latest result; the UI receives metadata and 25-record pages. Switching workspaces retains the mounted comparison. Reload clears it; compare state does not change IndexedDB or merge backups. The service invalidates its result before loading/selecting/running, so failed changes cannot export a stale report.
+
+`compare.ts` validates unique mappings and selected values, indexes rows by an explicitly chosen key, and performs exact text comparison unless trim/case options are enabled. Limits are 20,000 nonblank rows per side and 50 fields besides the ID. The shared reader adds optional delimiter and timestamp preservation arguments; merge defaults are unchanged. `compare-export.ts` streams three worksheets into XLSX with inline text cells, literal Excel escape-like strings and source provenance. Report strings cannot become formulas.
+
+Run `npm --prefix frontend test` for comparison and existing unit coverage. Run the normal Chromium suite for full regression coverage, or `cd frontend` followed by `npx playwright test --config=playwright.compare.config.ts --project=chromium` for the focused comparison suite. Existing installed WebKit can run the same focused suite, with its offline-simulation and scale skips explicitly recorded. Artifacts and measured capacity are under `docs/verification/compare/`.
+
+### Automatic matching (v1.1.1)
+
+`compare-plan.ts` runs inside the comparison worker. It matches normalized equal headers, recognizes a bounded set of ID-like names, and proposes known synonyms only for review. Multiple possible identifiers, unknown/renamed fields and disjoint ID sets require explicit confirmation. With clear matching, the existing comparison engine runs automatically and retains its duplicate/empty-ID blockers. The planner does not treat uniqueness alone as proof that a descriptive column is an ID. Multiple-sheet files require a worksheet confirmation before planning.
+
+The UI applies the plan once per pair of selected input snapshots, keeps complete controls in Advanced matching settings and sends explicit user edits through the same validated engine. Results show concise changed values first, with all selected values still available in details and exports.

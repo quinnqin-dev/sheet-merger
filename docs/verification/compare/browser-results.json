@@ -1,0 +1,179 @@
+{
+  "version": "1.1.1",
+  "verifiedAt": "2026-11-14T00:00:35+08:00",
+  "passed": 25,
+  "skipped": 3,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "sample comparison and exported workbook are correct; merge data and comparisons survive navigation",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 2829
+    },
+    {
+      "name": "blank/duplicate keys block results, normalization collisions are visible, and configuration edits invalidate export",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1375
+    },
+    {
+      "name": "CSV separator and shifted header controls recover preamble input; XLSX worksheet selection and missing formulas are handled",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1179
+    },
+    {
+      "name": "compare worker, sample and report work offline even when compare was never opened online",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 2075
+    },
+    {
+      "name": "comparison layout and report at 1440px",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1211
+    },
+    {
+      "name": "comparison layout and report at 412px",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1227
+    },
+    {
+      "name": "comparison layout and report at 320px",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1227
+    },
+    {
+      "name": "20,000 records per side and 50 compared fields have correct counts and a complete streamed report",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 7407
+    },
+    {
+      "name": "explicit tab separator and header row recover a tab-delimited CSV with a preamble",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1134
+    },
+    {
+      "name": "WebKit compares and downloads offline with the preview server stopped",
+      "engine": "chromium",
+      "actualStatus": "skipped",
+      "durationMilliseconds": 136
+    },
+    {
+      "name": "matching files display differences immediately with every setup control collapsed",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1038
+    },
+    {
+      "name": "multiple identifiers require one explicit choice rather than an automatic guess",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 960
+    },
+    {
+      "name": "disjoint identifiers require confirmation and unknown fields require a mapping or explicit exclusion",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1342
+    },
+    {
+      "name": "sample comparison and exported workbook are correct; merge data and comparisons survive navigation",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 3163
+    },
+    {
+      "name": "blank/duplicate keys block results, normalization collisions are visible, and configuration edits invalidate export",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1385
+    },
+    {
+      "name": "CSV separator and shifted header controls recover preamble input; XLSX worksheet selection and missing formulas are handled",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1215
+    },
+    {
+      "name": "compare worker, sample and report work offline even when compare was never opened online",
+      "engine": "webkit",
+      "actualStatus": "skipped",
+      "durationMilliseconds": 122
+    },
+    {
+      "name": "comparison layout and report at 1440px",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1484
+    },
+    {
+      "name": "comparison layout and report at 412px",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1437
+    },
+    {
+      "name": "comparison layout and report at 320px",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1446
+    },
+    {
+      "name": "20,000 records per side and 50 compared fields have correct counts and a complete streamed report",
+      "engine": "webkit",
+      "actualStatus": "skipped",
+      "durationMilliseconds": 127
+    },
+    {
+      "name": "explicit tab separator and header row recover a tab-delimited CSV with a preamble",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1028
+    },
+    {
+      "name": "WebKit compares and downloads offline with the preview server stopped",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1711
+    },
+    {
+      "name": "matching files display differences immediately with every setup control collapsed",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1049
+    },
+    {
+      "name": "multiple identifiers require one explicit choice rather than an automatic guess",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 944
+    },
+    {
+      "name": "disjoint identifiers require confirmation and unknown fields require a mapping or explicit exclusion",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "durationMilliseconds": 1107
+    },
+    {
+      "name": "an over-wide file can be reduced to fifty fields without a stale warning",
+      "engine": "chromium",
+      "actualStatus": "passed",
+      "verification": "corrected focused rerun",
+      "durationSecondsApprox": 1.2
+    },
+    {
+      "name": "an over-wide file can be reduced to fifty fields without a stale warning",
+      "engine": "webkit",
+      "actualStatus": "passed",
+      "verification": "corrected focused rerun",
+      "durationSecondsApprox": 1.7
+    }
+  ]
+}

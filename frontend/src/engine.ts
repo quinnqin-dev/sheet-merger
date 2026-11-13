@@ -35,8 +35,15 @@ export const loadReader = () => import("./reader.ts");
 export async function readBook(
   file: File,
   encoding = "utf-8-sig",
+  delimiter = "",
+  preserveTimes = false,
 ): Promise<InputBook> {
-  return (await loadReader()).readBook(file, encoding);
+  return (await loadReader()).readBook(
+    file,
+    encoding,
+    delimiter,
+    preserveTimes,
+  );
 }
 export async function inspectFile(
   ...args: Parameters<(typeof import("./reader.ts"))["inspectFile"]>

@@ -22,6 +22,24 @@ No installation or account is required. Use a current browser, including Chrome 
 
 The app works best on desktop or tablet for complex template editing. On a phone, import files from the Android file picker and download the merged workbook normally.
 
+## Compare versions
+
+New in v1.1.1: compare spreadsheet exports without relying on row order.
+
+1. Open **Compare versions** and choose the original **Before** and updated **After** `.csv` or `.xlsx` files.
+2. Matching column names and one recognizable ID such as **ID**, **SKU** or **Order ID** are selected automatically. If the choice is clear, the differences appear immediately. Otherwise, confirm the short prompt for an ID, renamed fields or a worksheet. Renamed-column suggestions require confirmation; an unknown field must be mapped or explicitly excluded. If no IDs overlap, confirm before treating every row as added or removed.
+3. Review the **Added**, **Removed**, **Changed**, and **Unchanged** counts and concise field changes. Filter or search by ID, expand a record for full values, and download the Excel report with **Summary**, **Columns**, and **Comparison** worksheets.
+
+**Try it:** click **Try sample inventory**. **SKU** is selected and **Stock → Quantity** is proposed. Click **Show differences** once. Fictional inputs produce one record in each category; Notebook stock changes **20 → 25**. **Updated by** is visibly excluded and listed in the report. With matching headers, no confirmation is needed.
+
+**Change matching** opens the complete field mapping and optional whitespace/case rules. **Worksheet and import options** holds worksheet/header-row settings, UTF-8/GB18030 encoding and explicit CSV separators. A file with multiple worksheets requires choosing/confirming one. After changing worksheet or header settings, click **Read selected sheet**. Empty/duplicate IDs, selected formulas without saved results and unsupported report text block comparison with source-row diagnostics.
+
+Comparison supports **20,000 nonblank records per side**, **50 fields plus the ID**, and the existing **50 MB per-file** input limit. Selected text is limited to Excel's 32,767 characters per cell. Data is processed locally in a dedicated worker. Switching workspaces retains it; **reloading or closing the tab clears it**. Comparison files, mappings and results are excluded from merge-workspace backups. Download the report before leaving.
+
+Comparison uses saved scalar values as text: **001 ≠ 1**, **1.0 ≠ 1**, and case/whitespace matter by default. Empty cells and empty text are equal. Native dates/times use ISO values, including time of day; display formatting is ignored. Formula results are not recalculated. Optional matching rules never rewrite original values. Composite keys, fuzzy matching and numeric tolerances are not supported. Only selected fields determine record changes; excluded fields are disclosed on the results page and in the report.
+
+![Comparison with automatically matched files](docs/verification/compare/automatic-1440.png)
+
 ## User guide
 
 This example combines two student-grade tables with different headers: **12 records per file → 24 merged records**. The same steps apply to other spreadsheets. Screenshots use fictional data; click an image to view it at full size.

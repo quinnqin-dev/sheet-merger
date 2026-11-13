@@ -1,0 +1,14 @@
+{
+  "recordsPerSide": 20000,
+  "comparedFields": 50,
+  "counts": {
+    "added": 1,
+    "removed": 1,
+    "changed": 1,
+    "unchanged": 19998
+  },
+  "importAndCompareMilliseconds": 2088,
+  "totalIncludingExportMilliseconds": 6586,
+  "reportBytes": 7166682,
+  "exportedDataRows": 20001
+}

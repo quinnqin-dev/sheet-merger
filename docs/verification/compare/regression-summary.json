@@ -1,0 +1,35 @@
+{
+  "version": "1.1.1",
+  "verifiedAt": "2026-11-14T00:00:35+08:00",
+  "frontendUnitTests": {
+    "passed": 50,
+    "failed": 0
+  },
+  "comparisonBrowserChecks": {
+    "engines": [
+      "Chromium",
+      "WebKit"
+    ],
+    "passed": 25,
+    "skipped": 3,
+    "failed": 0
+  },
+  "selectedMergeRegression": {
+    "passed": 2,
+    "failed": 0,
+    "flows": [
+      "offline merge and saved workspace",
+      "full backup and recovery"
+    ]
+  },
+  "localeCatalogCheck": {
+    "passed": 1,
+    "failed": 0
+  },
+  "priorFullRegression": {
+    "version": "1.1.0",
+    "engine": "Chromium",
+    "passed": 29,
+    "skipped": 2
+  }
+}

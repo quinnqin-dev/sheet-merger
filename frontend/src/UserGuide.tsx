@@ -29,6 +29,16 @@ export function UserGuide({ onReturn }: { onReturn: () => void }) {
         </button>
       </div>
 
+      <section
+        className="panel guide-questions"
+        aria-labelledby="guide-compare-title"
+      >
+        <h2 id="guide-compare-title">{t("compare.guideTitle")}</h2>
+        <p>{t("compare.guideSteps")}</p>
+        <p>{t("compare.guideSample")}</p>
+        <p className="guide-limits">{t("compare.temporary")}</p>
+      </section>
+
       <div className="guide-concepts">
         <div>
           <Table2 size={20} />

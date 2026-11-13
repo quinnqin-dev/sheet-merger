@@ -27,3 +27,6 @@ coverage/
 frontend/test-results/
 frontend/playwright-report/
 *.tsbuildinfo
+
+# Local promotion production assets
+/promo/
